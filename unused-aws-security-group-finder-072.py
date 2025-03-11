@@ -1,6 +1,6 @@
 # AWS 환경의 보안그룹(Security Group) 최적화 도구
 # 본 스크립트는 AWS 인프라에서 미사용 중인 보안그룹을 효율적으로 식별하여 리소스 관리 최적화 및 보안 강화에 기여합니다.
-# 작성자: https://www.linkedin.com/in/072072072yc/
+# 문의: https://www.linkedin.com/in/072072072yc/
 
 import boto3
 ec2 = boto3.client('ec2')
