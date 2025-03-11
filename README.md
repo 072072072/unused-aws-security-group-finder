@@ -19,7 +19,8 @@ pip install -r requirements.txt
 # 스크립트 사용법
 
 본 코드는 python3.6 에서 구동 테스트 되었습니다. 
-
-```python
-사용법: ./unused-aws-security-group-finder.py
+```bash
+. venv /bin/activate
+python3 unused-aws-security-group-finder.py
+```
 
