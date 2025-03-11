@@ -3,12 +3,16 @@
 # 문의: https://www.linkedin.com/in/072072072yc/
 
 import boto3
+
+
 ec2 = boto3.client('ec2')
 elb = boto3.client('elbv2')
 elb_classic = boto3.client('elb')
 rds = boto3.client('rds')
 lambda_client = boto3.client('lambda')
 autoscaling = boto3.client('autoscaling')
+
+
 def get_attached_security_group_ids():
     attached_sg_ids = set()
     for interface in ec2.describe_network_interfaces()['NetworkInterfaces']:
@@ -46,13 +50,15 @@ def get_attached_security_group_ids():
                 for sg in lt_response['LaunchTemplateVersions'][0]['LaunchTemplateData'].get('SecurityGroupIds', []):
                     attached_sg_ids.add(sg)
     return attached_sg_ids
-all_sg_ids = set(sg['GroupId'] for sg in ec2.describe_security_groups()['SecurityGroups'])
-attached_sg_ids = get_attached_security_group_ids()
-unattached_sg_ids = all_sg_ids - attached_sg_ids
-for sg_id in unattached_sg_ids:
-    try:
-        response = ec2.describe_security_groups(GroupIds=[sg_id])
-        group_name = response['SecurityGroups'][0]['GroupName']
-        print(f"GroupId: {sg_id}, GroupName: {group_name}")
-    except Exception as e:
-        print(f"Error getting information for {sg_id}: {e}")
+
+if __name__ == '__main__':
+    all_sg_ids = set(sg['GroupId'] for sg in ec2.describe_security_groups()['SecurityGroups'])
+    attached_sg_ids = get_attached_security_group_ids()
+    unattached_sg_ids = all_sg_ids - attached_sg_ids
+    for sg_id in unattached_sg_ids:
+        try:
+            response = ec2.describe_security_groups(GroupIds=[sg_id])
+            group_name = response['SecurityGroups'][0]['GroupName']
+            print(f"GroupId: {sg_id}, GroupName: {group_name}")
+        except Exception as e:
+            print(f"Error getting information for {sg_id}: {e}")
