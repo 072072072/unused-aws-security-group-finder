@@ -8,6 +8,13 @@ AWS 환경의 보안그룹(Security Group) 최적화 도구
 Screenshot:
 ![image](https://github.com/user-attachments/assets/fdc937ac-0647-4f99-ace5-3773d4df0fdb)
 
+# Requirements
+
+```bash
+python3 -m venv venv
+. venv/bin/activate
+pip install -r requirements.txt
+```
 
 # 스크립트 사용법
 
